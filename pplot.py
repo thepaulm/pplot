@@ -2,6 +2,7 @@
 
 import matplotlib.pyplot as plt
 import seaborn as sns
+import numpy as np
 sns.set()
 
 
@@ -27,3 +28,21 @@ def ptt(*args):
     ax = fig.add_subplot(1, 1, 1)
     for a in args:
         ax.plot(a)
+
+
+def pts(x, y):
+    '''pts = plot time series (with obs, preds)'''
+    if len(x.shape) == 1:
+        x = np.array(x)
+        y = np.append(np.array([np.nan for _ in range(len(x))]), y)
+        ptt(x, y)
+    else:
+        plots = []
+        nans = 0
+        for tx, ty in zip(x, y):
+            tx = np.append(np.array([np.nan for _ in range(nans)]), tx)
+            ty = np.append(np.array([np.nan for _ in range(len(tx))]), ty)
+            plots.append(tx)
+            plots.append(ty)
+            nans += 1
+        ptt(*plots)
