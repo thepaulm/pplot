@@ -32,6 +32,8 @@ def ptt(*args):
 
 def pts(x, y):
     '''pts = plot time series (with obs, preds)'''
+    if len(x.shape) == 2 and x.shape[1] == 1:
+        x = x.squeeze()
     if len(x.shape) == 1:
         x = np.array(x)
         y = np.append(np.array([np.nan for _ in range(len(x))]), y)
