@@ -30,14 +30,18 @@ def ptt(*args):
         ax.plot(a)
 
 
-def pts(x, y):
+def pts(x, y, p=None):
     '''pts = plot time series (with obs, preds)'''
     if len(x.shape) == 2 and x.shape[1] == 1:
         x = x.squeeze()
     if len(x.shape) == 1:
         x = np.array(x)
         y = np.append(np.array([np.nan for _ in range(len(x))]), y)
-        ptt(x, y)
+        if p is not None:
+            p = np.append(np.array([np.nan for _ in range(len(x))]), p)
+            ptt(x, y, p)
+        else:
+            ptt(x, y)
     else:
         plots = []
         nans = 0
@@ -46,5 +50,8 @@ def pts(x, y):
             ty = np.append(np.array([np.nan for _ in range(len(tx))]), ty)
             plots.append(tx)
             plots.append(ty)
+            if p is not None:
+                tp = np.append(np.array([np.nan for _ in range(len(tx))]), p[nans])
+                plots.append(tp)
             nans += 1
         ptt(*plots)
