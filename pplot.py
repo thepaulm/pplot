@@ -27,6 +27,8 @@ def ptt(*args):
     fig = plt.figure(1, figsize=(w, h))
     ax = fig.add_subplot(1, 1, 1)
     for a in args:
+        if 1 in a.shape:
+            a = a.squeeze()
         ax.plot(a)
 
 
