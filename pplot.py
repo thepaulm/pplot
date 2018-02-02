@@ -6,6 +6,9 @@ import numpy as np
 sns.set()
 
 
+#
+# Graphs
+#
 def pta(*args, color_rotate=True):
     '''pta = plot them all'''
     count = len(args)
@@ -57,3 +60,22 @@ def pts(x, y, p=None):
                 plots.append(tp)
             nans += 1
         ptt(*plots)
+
+
+#
+# Cartesian / Euclidian
+#
+def rects(*rs):
+    figsize = (10, 7)
+    fig = plt.figure(figsize=figsize)
+    ax = fig.add_subplot(1, 1, 1)
+    ax.grid(b=True, which='major')
+    c = '#aaaaaa'
+    for r in rs:
+        xs = [p[0] for p in r]
+        ys = [p[1] for p in r]
+        ax.scatter(xs, ys)
+        ax.plot([xs[0], xs[1]], [ys[0], ys[1]], '-', linewidth=1, color='r')
+        ax.plot([xs[1], xs[3]], [ys[1], ys[3]], '-', linewidth=1, color=c)
+        ax.plot([xs[3], xs[2]], [ys[3], ys[2]], '-', linewidth=1, color=c)
+        ax.plot([xs[2], xs[0]], [ys[2], ys[0]], '-', linewidth=1, color=c)
