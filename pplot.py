@@ -79,3 +79,20 @@ def rects(*rs):
         ax.plot([xs[1], xs[3]], [ys[1], ys[3]], '-', linewidth=1, color=c)
         ax.plot([xs[3], xs[2]], [ys[3], ys[2]], '-', linewidth=1, color=c)
         ax.plot([xs[2], xs[0]], [ys[2], ys[0]], '-', linewidth=1, color=c)
+
+
+def plotxy(points):
+    figsize = (10, 7)
+    fig = plt.figure(figsize=figsize)
+    ax = fig.add_subplot(1, 1, 1)
+    xs = [p[0] for p in points]
+    ys = [p[1] for p in points]
+    domain = max(xs) - min(xs)
+    xtra = .10 * domain
+    domain = max(ys) - min(ys)
+    ytra = .10 * domain
+    ax.set_xlim(min(xs) - xtra, max(xs) + xtra)
+    ax.set_ylim(min(ys) - ytra, max(ys) + ytra)
+    ax.grid(b=True, which='major')
+    c = '#aa0022'
+    ax.scatter(xs, ys, color=c)
